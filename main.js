@@ -16,7 +16,6 @@ function getTwentyUsers() {
 }
 
 let allUsers = document.getElementById('all-users')
-let ul = document.getElementById('more-info')
 let li2 = document.createElement('li');
 let br = document.createElement('br')
 
@@ -24,105 +23,58 @@ const displayUser =() => {
     
     //arrayOfUsers itself is an object because we turned it into JSON but the array results is nested in the object and contains all the data so then we direct into that array so we can then perform Array higher order functions on the data. If we dont direct to the results array and try to do Array functions on the entire JSON then we will get not a function because you cant perfrom array fucntions on an object!
     arrayOfUsers.results.map((user) => {
-        //display their names
-        const id = Math.floor(Math.random() * 10000000000)
 
+    // Give each user a random # as their id
+        const id1 = Math.floor(Math.random() * 10000000000)
+        const id2 = Math.floor(Math.random() * 10000000000)
         li = document.createElement('li');
-        li.setAttribute('id', id)
-    
-        const text = document.createTextNode(`First Name: ${user.name.first}, Last Name: ${user.name.last}`)
+        li.setAttribute('id', id1)
+    //Display their First and Last name from the data
+        const text = `First Name: ${user.name.first}, Last Name: ${user.name.last}`
         console.log(user)
-        //display their thumbnails
+    //Display their thumbnail images
         const source = user.picture.thumbnail
         const img = document.createElement('img')
         img.src = source;
-        //display more info buttons
+    //Display more info buttons and then give each specific users more info button an id of a random #
         let butt = document.createElement('button')
         const buttDisplayText = document.createTextNode("More Info")
-        butt.setAttribute('id',id)
-        
+        butt.setAttribute('id',id2)
+    //Display the additional info when button is pressed
         butt.onclick = function displayMoreUserInfo () {
-            // arrayOfUsers.forEach(user => {
-                // user = arrayOfUsers.results[0].id.value;
-                const currentLi = document.getElementById(id)
-                const grabAge = user.dob.age
-                const grabPhone = user.cell
+                    //The JS created elements
                 const li2 = document.createElement('li')
                 const innerul = document.createElement('ul');
-                const theInfo = ` Age: ${grabAge} Phone #: ${grabPhone}`
+                    //Grab each individual users li by its id (The first li)
+                const currentLi = document.getElementById(id1)
+                    //Infromation of the users from the data
+                const grabAge = user.dob.age;
+                const grabPhone = user.cell;
+                    //Creating a string from the stored properties
+                const theInfo = `Age: ${grabAge} Phone #: ${grabPhone}`;
+            //Display the string containing each individual users additional info
                 li2.innerHTML = theInfo;
-                
-                innerul.appendChild(li2) 
+                    //Append the second li to the second ul
+                innerul.appendChild(li2)
+                    //Append the new ul to the users existing li
                 currentLi.appendChild(innerul)
-                console.log(li2,innerul,currentLi)
             // })
         }
-        //img
-        allUsers.append(img) //append each users img to the allUsers ul
+
+    //Img's
+        //Append each users img to the allUsers ul
+        allUsers.append(img) 
         
-        // allUsers.append(butt) //Give each user a more info button
-        //li text
-        li.append(text) //append the information to each li(user)
-        allUsers.append(li)// append the lis to the allUsers ul
-        //button
-        butt.appendChild(buttDisplayText) //Buttons label
+    
+    //Individual users information
+        li.innerHTML = text;
+            //Append each users individual li to the ul
+        allUsers.appendChild(li)
+            
+    //Button's
+            //Buttons label
+        butt.appendChild(buttDisplayText)
+            //Also append the 'More Info' button to each user along their information
         li.append(butt)
 })
 }
-
-
-//get the value of the button by giving it an id instead of the li
-// target the ids of the users given in the response
-// with the users special ids i can filter throught the array and find that users id in the array
-
-
-
-
-// function displayMoreUserInfo () {
-//     // arrayOfUsers.forEach(user => {
-//         // user = arrayOfUsers.results[0].id.value;
-//         const grabAge = arrayOfUsers.results[0].dob.age
-//         const grabPhone = arrayOfUsers.results.cell
-//         li2 = document.createElement('li')
-//         ul = document.getElementById('more-info')
-//         const theInfo = document.createTextNode(` Age: ${grabAge} Phone #: ${grabPhone}`)
-        
-//         li2.append(theInfo)
-//         li.appendChild(li2)
-//         allUsers.appendChild(li2) 
-//     // })
-    
-// console.log(arrayOfUsers.results[0].id.value)
-// console.log(arrayOfUsers.results[0].dob.age)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//     // ul.innerHTML = ""
-//     // let number = Array.from(contact.parentElement.children).indexOf(contact) // I understand that .from() is to turn an array into a string but which one is the array, parentElement or children? and what are these properties exactly?
-//     // let index = data.results[number]
-//     // li2 = document.createElement('li')
-//     // li2.innerHTML = `Email: <u>${index.email}</u>
-//     // <br>
-//     // Age: ${index.dob.age}
-//     // <br>
-//     // Address:
-//     // <br><i>
-//     // ${index.location.street.number} ${index.location.street.name} <br>${index.location.city}, ${index.location.state} <br>${index.location.country} </i>`
-//     // ul.append(li2)
-//     // contact.append(ul)//?
-// }
-
