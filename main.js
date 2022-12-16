@@ -24,9 +24,9 @@ const displayUser =() => {
     //arrayOfUsers itself is an object because we turned it into JSON but the array results is nested in the object and contains all the data so then we direct into that array so we can then perform Array higher order functions on the data. If we dont direct to the results array and try to do Array functions on the entire JSON then we will get not a function because you cant perfrom array fucntions on an object!
     arrayOfUsers.results.map((user) => {
 
-    // Give each user a random # as their id
+    // Create each users li and then give each user a random # as their id
+            // !!!!!!!!!      // const id1= user.id.value //This is the normal way to set a element to have an id from an apis data (We had to do it differently because the ids in the api are weird)
         const id1 = Math.floor(Math.random() * 10000000000)
-        const id2 = Math.floor(Math.random() * 10000000000)
         li = document.createElement('li');
         li.setAttribute('id', id1)
     //Display their First and Last name from the data
@@ -36,10 +36,10 @@ const displayUser =() => {
         const source = user.picture.thumbnail
         const img = document.createElement('img')
         img.src = source;
-    //Display more info buttons and then give each specific users more info button an id of a random #
+    //Display more info buttons
         let butt = document.createElement('button')
         const buttDisplayText = document.createTextNode("More Info")
-        butt.setAttribute('id',id2)
+        
     //Display the additional info when button is pressed
         butt.onclick = function displayMoreUserInfo () {
                     //The JS created elements
@@ -58,7 +58,6 @@ const displayUser =() => {
                 innerul.appendChild(li2)
                     //Append the new ul to the users existing li
                 currentLi.appendChild(innerul)
-            // })
         }
 
     //Img's
